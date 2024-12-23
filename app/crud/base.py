@@ -52,8 +52,8 @@ class CRUDBase:
         obj_data = jsonable_encoder(db_obj)
         update_data = obj_in.dict(exclude_unset=True)
         if (
-            'full_amount' in update_data
-            and update_data['full_amount'] == db_obj.invested_amount
+            'full_amount' in update_data and
+            update_data['full_amount'] == db_obj.invested_amount
         ):
             update_data['fully_invested'] = True
             update_data['close_date'] = datetime.now()
