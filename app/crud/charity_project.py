@@ -1,5 +1,5 @@
 from datetime import timedelta
-from typing import Optional
+from typing import Optional, Union
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -21,7 +21,7 @@ class CRUDCharityProject(CRUDBase):
 
     async def get_projects_by_completion_rate(
         self, session: AsyncSession
-    ) -> list[dict[str, str, timedelta]]:
+    ) -> list[dict[str, Union[str, timedelta]]]:
         """Получение списка проектов, отсортированных по скорости закрытия."""
         projects_db = await session.execute(
             select(self.model).where(self.model.fully_invested)

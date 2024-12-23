@@ -1,3 +1,6 @@
+from datetime import timedelta
+from typing import Union
+
 from aiogoogle import Aiogoogle
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -24,7 +27,7 @@ router = APIRouter()
 async def get_report(
     session: AsyncSession = Depends(get_async_session),
     wrapper_services: Aiogoogle = Depends(get_service),
-):
+) -> list[dict[str, Union[str, timedelta]]]:
     """Только для суперюзеров. Топ проектов по скорости закрытия."""
     projects = await charity_project_crud.get_projects_by_completion_rate(
         session
